@@ -1,0 +1,56 @@
+{
+  "name": "findPick",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
+    "devTools": "remotedev --hostname=localhost --port=8080 --realtime=true",
+    "reverses": "adb reverse tcp:8080 tcp:8080 && adb reverse tcp:9090 tcp:9090 ",
+    "devmenu": "adb shell input keyevent 82",
+    "runBoth": "react-native run-android && react-native run-ios",
+    "clean:android": "cd android/ && ./gradlew clean && cd .. && react-native run-android",
+    "android:build": "cd android && ./gradlew assembleRelease",
+    "android:install": "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
+    "fixcode": "standard --fix"
+  },
+  "dependencies": {
+    "react": "^16.3.0-alpha.1",
+    "react-native": "0.54.4",
+    "reactotron-redux-saga": "^1.13.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.3",
+    "react-test-renderer": "^16.3.0-alpha.1",
+    "reactotron-react-native": "^1.14.0",
+    "reactotron-redux": "^1.13.0",
+    "remote-redux-devtools": "^0.5.12",
+    "standard": "^11.0.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ],
+    "parser": "babel-eslint",
+    "globals": [
+      "API_PATH_BASE",
+      "describe",
+      "test",
+      "jest",
+      "expect",
+      "fetch",
+      "navigator",
+      "__DEV__",
+      "XMLHttpRequest",
+      "FormData",
+      "React$Element"
+    ]
+  }
+}
