@@ -6,10 +6,11 @@ import picActions from '../Redux/Reducers/pic'
 
 export function * getSearchPic (action) {
   const { fetchedPics, requestFailed } = picActions
-  const responseList = yield call(getSearchPicRequest)
+  const { payload } = action
+  const responseList = yield call(getSearchPicRequest, payload)
   if (responseList.ok) {
     const { data } = responseList
-    yield put(fetchedPics({ picList: data.message }))
+    // yield put(fetchedPics({ picList: data.message }))
   } else {
     yield put(requestFailed(responseList.error))
   }

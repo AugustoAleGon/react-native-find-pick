@@ -1,6 +1,9 @@
-import unsplash from '../apiUtils'
+import {unsplashApi} from '../apiUtils'
+import { toJson } from 'unsplash-js/src/unsplash'
 
 export const getSearchPic = async (param) => {
-  let responsePic = await unsplash.search.photos(param)
+  let responsePic = toJson(await unsplashApi.search.photos(param))
+  let resolvePic = await responsePic
+  console.log('This is my data: ', resolvePic)
   return responsePic
 }

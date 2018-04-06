@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
-import {Root} from 'native-base'
+import {View} from 'react-native'
 import HomeScreen from './HomeScreen'
 
 class RootContainer extends Component {
   render () {
     return (
-      <Root>
+      <View>
         <HomeScreen />
-      </Root>
+      </View>
     )
   }
 }
