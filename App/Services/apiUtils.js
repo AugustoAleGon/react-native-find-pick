@@ -1,5 +1,5 @@
 // ES Modules syntax
-import Unsplash from 'unplash-js/native'
+import Unsplash from 'unsplash-js/native'
 
 export const unplash = new Unsplash({
   applicationId: '{24071}',

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import {
   Platform,
-  Text,
   View
 } from 'react-native'
+import RootContainer from './Containers/RootContainer'
 import { Provider } from 'react-redux'
-import DebugConfig from '../Config/DebugConfig'
+import DebugConfig from './Config/DebugConfig'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import {persistStore} from 'redux-persist'
-import createStore from '../Redux'
+import createStore from './Redux'
 
 // Create our store
 const store = createStore()
@@ -26,9 +26,7 @@ class App extends Component<Props> {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-            <Text>
-              Welcome to Pic Application!
-            </Text>
+            <RootContainer />
           </View>
         </PersistGate>
       </Provider>

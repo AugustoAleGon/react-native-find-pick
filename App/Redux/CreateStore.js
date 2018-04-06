@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import {composeWithDevTools} from 'remote-redux-devtools'
 import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
@@ -11,13 +11,12 @@ export default (rootReducer, rootSaga) => {
   const composeEnhancers = composeWithDevTools({ realtime: true, port: 8080 })
 
   /* ------------- Saga Middleware ------------- */
-
   const sagaMonitor = Config.useReactotron ? console.tron.createSagaMonitor() : null
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
   middleware.push(sagaMiddleware)
 
   /* ------------- Assemble Middleware ------------- */
-
+  enhancers.push(applyMiddleware(...middleware))
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
 

@@ -7,7 +7,7 @@ import sagaPlugin from 'reactotron-redux-saga'
 if (Config.useReactotron) {
   // https://github.com/infinitered/reactotron for more options!
   Reactotron
-    .configure({ name: 'DogApp',
+    .configure({ name: 'findPick',
       socketIoProperties: {
         reconnection: true,
         reconnectionDelay: 2000,

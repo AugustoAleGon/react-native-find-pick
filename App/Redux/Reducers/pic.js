@@ -9,7 +9,7 @@ const { Types, Creators } = createActions({
   requestFailed: ['error']
 })
 
-export const dogTypes = Types
+export const picTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
