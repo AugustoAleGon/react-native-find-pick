@@ -22,9 +22,7 @@ class App extends Component<Props> {
         <PersistGate loading={null} persistor={persistor}>
           <View style={{
             flex: 1,
-            paddingTop: Platform.OS === 'ios' ? 20 : 0,
-            justifyContent: 'center',
-            alignItems: 'center'
+            paddingTop: Platform.OS === 'ios' ? 20 : 0
           }}>
             <RootContainer />
           </View>
