@@ -7,13 +7,11 @@ import { takeLatest } from 'redux-saga/effects'
 
 import { picTypes } from '../Redux/Reducers/pic'
 
-
 /* ------------- Sagas ------------- */
 
 import {
-  getRandomPic
+  getSearchPic
 } from './picSaga'
-
 
 /* ------------- API ------------- */
 
@@ -24,6 +22,6 @@ export default function * root () {
   yield [
     // some sagas only receive an action
     // pic saga
-    takeLatest(picTypes.GET_RANDOM_PIC, getRandomPic)
+    takeLatest(picTypes.GET_SEARCH_PIC, getSearchPic)
   ]
 }

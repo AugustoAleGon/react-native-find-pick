@@ -24,7 +24,7 @@ export default () => {
     rootConfig,
     combineReducers({
     // All my reducers are here:
-      dog: persistReducer(picConfig, resettable(pic))
+      pic: persistReducer(picConfig, resettable(pic))
     })
   )
 

@@ -18,7 +18,6 @@ export default (rootReducer, rootSaga) => {
 
   /* ------------- Assemble Middleware ------------- */
 
-  
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
 

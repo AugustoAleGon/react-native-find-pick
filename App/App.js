@@ -1,48 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react'
 import {
   Platform,
-  StyleSheet,
   Text,
   View
 } from 'react-native'
+import { Provider } from 'react-redux'
+import DebugConfig from '../Config/DebugConfig'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import {persistStore} from 'redux-persist'
+import createStore from '../Redux'
+
+// Create our store
+const store = createStore()
+const persistor = persistStore(store)
 
 type Props = {}
-export default class App extends Component<Props> {
+class App extends Component<Props> {
   render () {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          Hello World!
-        </Text>
-      </View>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <View style={{
+            flex: 1,
+            paddingTop: Platform.OS === 'ios' ? 20 : 0,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Text>
+              Welcome to Pic Application!
+            </Text>
+          </View>
+        </PersistGate>
+      </Provider>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
-})
+export default DebugConfig.useReactotron
+  ? console.tron.overlay(App)
+  : App
