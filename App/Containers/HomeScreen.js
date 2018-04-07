@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -21,12 +22,14 @@ class HomeScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
-      listOfPic: [],
       searchTerm: ''
     }
   }
-  componentDidMount () {
-    this.props.getSearchPic('Home')
+
+  _renderItem = ({item}) => {
+    <PicListScreen
+      mainPic={item.urls.regular}
+      authorName={item.user.name} />
   }
 
   render () {
@@ -39,7 +42,6 @@ class HomeScreen extends Component {
               name='ios-search'
               size={24}/>
             <TextInput
-              ref={ (val) => {this.searchInput = val }}
               value={this.state.searchTerm}
               onChangeText={(input) => {this.setState({searchTerm: input})}}
               style={styles.searchBarInputStyle}
@@ -48,7 +50,9 @@ class HomeScreen extends Component {
             />
             <TouchableOpacity
               onPress={ () => {
+                this.props.getSearchPic(this.state.searchTerm)
                 this.setState({searchTerm: ''})
+                console.log('Those are my pics: ', this.props.picList)
               }
               }
               style={styles.searchButtonContainer}>
@@ -56,9 +60,13 @@ class HomeScreen extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <PicListScreen
+        <FlatList
+          renderItem={this._renderItem}
+          keyExtractor={item => item.id}
+          data={this.props.picList}/>
+        {/* <PicListScreen
           mainPic='https://images.unsplash.com/photo-1510782977572-76493a0a7f57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjI0MDcxfQ&s=719af9667580e95e7adca175126877d4'
-          authorName='Leonardo Da Vinci'/>
+          authorName='Leonardo Da Vinci'/> */}
       </View>
     )
   }g

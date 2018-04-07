@@ -1,4 +1,5 @@
 import {call, put} from 'redux-saga/effects'
+import { toJson } from 'unsplash-js/src/unsplash'
 import {
   getSearchPic as getSearchPicRequest
 } from '../Services'
@@ -9,9 +10,9 @@ export function * getSearchPic (action) {
   const { payload } = action
   const responseList = yield call(getSearchPicRequest, payload)
   if (responseList.ok) {
-    const { data } = responseList
-    // yield put(fetchedPics({ picList: data.message }))
+    const responseNew = yield call(toJson.bind(this, responseList))
+    yield put(fetchedPics({ picList: responseNew.results }))
   } else {
-    yield put(requestFailed(responseList.error))
+    yield put(requestFailed('Error'))
   }
 }
