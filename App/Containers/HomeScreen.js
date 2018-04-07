@@ -18,8 +18,24 @@ import PicListScreen from '../Components/PicListScreen'
 import styles from './Styles/HomeScreenStyle'
 import {Colors} from '../Themes'
 
+// For testing purpose we this array
+const testArray = [
+  {
+    name: 'Marco',
+    id: '1'
+  },
+  {
+    name: 'Polo',
+    id: '2'
+  },
+  {
+    name: 'Cris',
+    id: '3'
+  }
+]
+
 class HomeScreen extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
     this.state = {
       searchTerm: ''
@@ -27,32 +43,44 @@ class HomeScreen extends Component {
   }
 
   _renderItem = ({item}) => {
-    <PicListScreen
-      mainPic={item.urls.regular}
-      authorName={item.user.name} />
+    if (item.user) {
+      return (
+        <PicListScreen
+          mainPic={item.urls.regular}
+          authorName={item.user.name} />
+      )
+    } else {
+      return (
+        <Text>There is no data here</Text>
+      )
+    }
+    }
+
+  //In order to clean the state for the next query
+  componentDidMount () {
+    this.props.resetAll()
   }
 
   render () {
     return (
-      <View>
+      <View style={styles.mainContainer}>
         <View style={styles.searchBarWrapper}>
           <View style={styles.searchBarContainer}>
             <Ionicon
               color={Colors.blueIOS}
               name='ios-search'
-              size={24}/>
+              size={24} />
             <TextInput
               value={this.state.searchTerm}
-              onChangeText={(input) => {this.setState({searchTerm: input})}}
+              onChangeText={(input) => { this.setState({searchTerm: input}) }}
               style={styles.searchBarInputStyle}
               placeholder='Enter a tag for a photo'
               underlineColorAndroid='transparent'
             />
             <TouchableOpacity
-              onPress={ () => {
+              onPress={() => {
                 this.props.getSearchPic(this.state.searchTerm)
                 this.setState({searchTerm: ''})
-                console.log('Those are my pics: ', this.props.picList)
               }
               }
               style={styles.searchButtonContainer}>
@@ -60,13 +88,12 @@ class HomeScreen extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <FlatList
-          renderItem={this._renderItem}
-          keyExtractor={item => item.id}
-          data={this.props.picList}/>
-        {/* <PicListScreen
-          mainPic='https://images.unsplash.com/photo-1510782977572-76493a0a7f57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjI0MDcxfQ&s=719af9667580e95e7adca175126877d4'
-          authorName='Leonardo Da Vinci'/> */}
+        <View>
+          <FlatList
+            renderItem={this._renderItem}
+            keyExtractor={item => item.id}
+            data={this.props.picList.picList} />
+        </View>
       </View>
     )
   }g
@@ -80,7 +107,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    getSearchPic: bindActionCreators(picActions.getSearchPic, dispatch)
+    getSearchPic: bindActionCreators(picActions.getSearchPic, dispatch),
+    resetAll: bindActionCreators(picActions.picsReset, dispatch)
   }
 }
 

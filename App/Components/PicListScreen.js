@@ -30,7 +30,7 @@ class PicListScreen extends Component {
         <View style={styles.mainPicContainer}>
           <Image
             source={{uri: this.props.mainPic}}
-            style={styles.mainPicStyle}/>
+            style={styles.mainPicStyle} />
         </View>
       </View>
     )

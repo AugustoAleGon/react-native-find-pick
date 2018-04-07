@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   getSearchPic: ['payload'],
   fetchedPics: ['response'],
-  requestFailed: ['error']
+  requestFailed: ['error'],
+  picsReset: null
 })
 
 export const picTypes = Types
@@ -32,9 +33,14 @@ const failedRequest = (state, action) => ({
   error: action.error
 })
 
+const resetPics = () => ({
+  ...INITIAL_STATE
+})
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.REQUEST_FAILED]: failedRequest,
-  [Types.FETCHED_PICS]: fetchedPics
+  [Types.FETCHED_PICS]: fetchedPics,
+  [Types.PICS_RESET]: resetPics
 })

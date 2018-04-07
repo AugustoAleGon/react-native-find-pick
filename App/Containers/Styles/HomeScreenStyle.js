@@ -2,6 +2,8 @@ import {StyleSheet} from 'react-native'
 import { Colors } from '../../Themes'
 
 export default StyleSheet.create({
+  mainContainer: {
+  },
   searchBarWrapper: {
     margin: 7
   },
@@ -17,17 +19,17 @@ export default StyleSheet.create({
     padding: 7
   },
   searchBarInputStyle: {
-      color: '#000',
-      paddingLeft: 5,
-      flex: 1
+    color: '#000',
+    paddingLeft: 5,
+    flex: 1
   },
   searchButtonContainer: {
-      width: 70,
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderWidth: 0.5,
-      borderRadius: 5,
-      borderColor: Colors.darkBlueIOS
+    width: 70,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 0.5,
+    borderRadius: 5,
+    borderColor: Colors.darkBlueIOS
   }
 })
