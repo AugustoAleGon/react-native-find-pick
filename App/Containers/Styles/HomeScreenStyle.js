@@ -19,9 +19,10 @@ export default StyleSheet.create({
     padding: 7
   },
   searchBarInputStyle: {
-    color: '#000',
+    color: 'black',
     paddingLeft: 5,
-    flex: 1
+    flex: 1,
+    height: 40
   },
   searchButtonContainer: {
     width: 70,

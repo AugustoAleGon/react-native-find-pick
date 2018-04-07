@@ -20,7 +20,7 @@ class PicListScreen extends Component {
             source={Images.unsplashLogo} />
           <View>
             <Text style={styles.titleStyle}>
-              Unplash
+              Unsplash
             </Text>
             <Text style={styles.authorTextStyle}>
               {this.props.authorName}
