@@ -18,6 +18,13 @@ import styles from './Styles/HomeScreenStyle'
 import {Colors} from '../Themes'
 
 class HomeScreen extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      listOfPic: [],
+      searchTerm: ''
+    }
+  }
   componentDidMount () {
     this.props.getSearchPic('Home')
   }
@@ -32,11 +39,19 @@ class HomeScreen extends Component {
               name='ios-search'
               size={24}/>
             <TextInput
+              ref={ (val) => {this.searchInput = val }}
+              value={this.state.searchTerm}
+              onChangeText={(input) => {this.setState({searchTerm: input})}}
               style={styles.searchBarInputStyle}
               placeholder='Enter a tag for a photo'
               underlineColorAndroid='transparent'
             />
-            <TouchableOpacity style={styles.searchButtonContainer}>
+            <TouchableOpacity
+              onPress={ () => {
+                this.setState({searchTerm: ''})
+              }
+              }
+              style={styles.searchButtonContainer}>
               <Text>Search</Text>
             </TouchableOpacity>
           </View>
@@ -46,7 +61,7 @@ class HomeScreen extends Component {
           authorName='Leonardo Da Vinci'/>
       </View>
     )
-  }
+  }g
 }
 
 const mapStateToProps = (state, props) => {
