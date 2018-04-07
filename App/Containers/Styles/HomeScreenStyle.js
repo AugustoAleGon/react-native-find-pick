@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import { Colors } from '../../Themes'
 
 export default StyleSheet.create({
   searchBarWrapper: {
@@ -17,6 +18,16 @@ export default StyleSheet.create({
   },
   searchBarInputStyle: {
       color: '#000',
-      paddingLeft: 5
+      paddingLeft: 5,
+      flex: 1
+  },
+  searchButtonContainer: {
+      width: 70,
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderWidth: 0.5,
+      borderRadius: 5,
+      borderColor: Colors.darkBlueIOS
   }
 })
